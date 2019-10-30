@@ -58,7 +58,7 @@ public class Topic_01_CheckEnvironment {
 	@AfterClass
 	public void afterClass() {
 		// Tắt trình duyệt
-		driver.close();
+		driver.quit();
 	}
 
 }
