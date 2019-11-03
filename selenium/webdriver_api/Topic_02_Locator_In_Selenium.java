@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -19,6 +20,8 @@ public class Topic_02_Locator_In_Selenium {
 	//Pre - condition 
 	@BeforeClass
 	public void beforeClass() {
+		//System.setProperty("webdriver.chrome.driver",".\\libraries\\chromedriver.exe");
+		//driver = new ChromeDriver();
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
@@ -87,8 +90,12 @@ public class Topic_02_Locator_In_Selenium {
 	}
 
 	@Test
-	public void TC_02_() {
-		driver.get("");
+	public void TC_02_DuplicateValue() throws InterruptedException {
+		driver.get("http://live.demoguru99.com/index.php/customer/account/login/");
+		
+		driver.findElement(By.xpath("//input[@id]")).sendKeys("duplicate@gmail.com");
+		Thread.sleep(5000);
+		
 	}
 
 		
