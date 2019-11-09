@@ -1,5 +1,6 @@
 package webdriver_api;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -35,11 +36,12 @@ public class Topic_03_XPath_Part1_Ex {
     
     String INPUT_INVALID_EMAIL = "12345@1235.1233";
     String INPUT_EMPTY= "";
-    String INPUT_VALID_EMAIL = "automation_13@gmail.com";
+    String INPUT_VALID_EMAIL = "automation_" + randomNumber() + "@gmail.com";
     String INPUT_PASS_LESSTHAN_6CHARS = "123";
     String INPUT_INVALID_PASS = "12345678";
     String INPUT_VALID_PASS = "123123";
-    
+    String FIRST_NAME = "Selenium";
+    String LAST_NAME = "Advance";
     
 	//Pre - condition 
 	@BeforeClass(description = "Chạy 1 lần duy nhất cho tất cả các test bên dưới")
@@ -56,7 +58,7 @@ public class Topic_03_XPath_Part1_Ex {
 		driver.findElement(By.xpath(XPATH_FOOTER_MY_ACCOUNT)).click();
     }
 	
-	@Test
+	//@Test
 	public void TC_01_LoginWithEmailAndPasswordEmpty() {
 		driver.findElement(By.xpath(XPATH_EMAIL)).sendKeys(INPUT_EMPTY);
 		driver.findElement(By.xpath(XPATH_PASS)).sendKeys(INPUT_EMPTY);
@@ -69,7 +71,7 @@ public class Topic_03_XPath_Part1_Ex {
 		Assert.assertEquals(errorPassMsg,ERROR_EMPTY_PASS_MSG);
 	}
 
-	@Test
+	//@Test
 	public void TC_02_LoginWithEmailInvalid() {
 		driver.findElement(By.xpath(XPATH_EMAIL)).sendKeys(INPUT_INVALID_EMAIL);
 		driver.findElement(By.xpath(XPATH_PASS)).sendKeys(INPUT_EMPTY);
@@ -81,7 +83,8 @@ public class Topic_03_XPath_Part1_Ex {
 		String errorPassMsg = driver.findElement(By.xpath(XPATH_EMPTY_PASS_MSG)).getText();
 		Assert.assertEquals(errorPassMsg,ERROR_EMPTY_PASS_MSG);
 	}
-	@Test
+
+	//@Test
 	public void TC_03_LoginWithPasswordLessThan6Chars() {
 		driver.findElement(By.xpath(XPATH_EMAIL)).sendKeys(INPUT_VALID_EMAIL);
 		driver.findElement(By.xpath(XPATH_PASS)).sendKeys(INPUT_PASS_LESSTHAN_6CHARS);
@@ -92,7 +95,7 @@ public class Topic_03_XPath_Part1_Ex {
 		
 		
 	}
-	@Test
+	//@Test
 	public void TC_04_LoginWithPasswordInvalid() {
 		driver.findElement(By.xpath(XPATH_EMAIL)).sendKeys(INPUT_VALID_EMAIL);
 		driver.findElement(By.xpath(XPATH_PASS)).sendKeys(INPUT_INVALID_PASS);
@@ -104,21 +107,41 @@ public class Topic_03_XPath_Part1_Ex {
 	}
 
 	@Test
-	public void TC_05_LoginWithValidEmailAndPassword() {
+	public void TC_05_CreateNewAccount()
+	{
+		driver.findElement(By.xpath("//span[text()='Create an Account']")).click();
+		driver.findElement(By.xpath("//input[@id='firstname']")).sendKeys(FIRST_NAME);
+		driver.findElement(By.xpath("//input[@id='lastname']")).sendKeys(LAST_NAME);
+		driver.findElement(By.xpath("//input[@id='email_address']")).sendKeys(INPUT_VALID_EMAIL);
+		driver.findElement(By.xpath("//input[@id='password']")).sendKeys(INPUT_VALID_PASS);
+		driver.findElement(By.xpath("//input[@id='confirmation']")).sendKeys(INPUT_VALID_PASS);
+		driver.findElement(By.xpath("//button[@title='Register']")).click();		
+		
+	}
+	@Test
+	public void TC_06_LoginWithValidEmailAndPassword() {
 		driver.findElement(By.xpath(XPATH_EMAIL)).sendKeys(INPUT_VALID_EMAIL);
 		driver.findElement(By.xpath(XPATH_PASS)).sendKeys(INPUT_VALID_PASS);
 		driver.findElement(By.xpath(XPATH_LOGIN_BUTTON)).click();
 		
-		Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='My Dashboard']")).isDisplayed());
+		//text cố định thì nên dùng hàm getText và assertEquals
+		Assert.assertEquals(driver.findElement(By.xpath("//h1")).getText(),"MY DASHBOARD");
 		
-		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='hello']//strong[text()='Hello, Automation Testing!']")).isDisplayed());
+		// text ko cố định thì dùng hàm isDisplayed
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@class='hello']//strong[text()='Hello, " + FIRST_NAME + " " + LAST_NAME + "!']")).isDisplayed());
 				
-		Assert.assertTrue(driver.findElement(By.xpath("//p[contains(.,'Automation Testing')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//p[contains(.,'"+ FIRST_NAME + " " + LAST_NAME + "')]")).isDisplayed());
 		
-		Assert.assertTrue(driver.findElement(By.xpath("//p[contains(.,'automation_13@gmail.com')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//p[contains(.,'" + INPUT_VALID_EMAIL + "')]")).isDisplayed());
 		
 		
 	}	
+	public int randomNumber(){
+		Random ran = new Random();
+		return ran.nextInt(100000);
+		
+	}
+	
     // Post - Condition
 	@AfterClass
 	public void afterClass() {
