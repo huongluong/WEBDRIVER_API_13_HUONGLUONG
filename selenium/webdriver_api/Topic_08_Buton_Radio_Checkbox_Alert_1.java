@@ -49,7 +49,7 @@ public class Topic_08_Buton_Radio_Checkbox_Alert_1 {
 		elementSelected("//input[@id='under_18']");
 	}
 
-	@Test
+	//@Test
 	public void TC_02_ClickByJS() {
 		driver.get("https://demo.nopcommerce.com/");
 		javascript.executeScript("arguments[0].click()",driver.findElement(By.xpath("//a[text()='Books '] ")));
@@ -57,9 +57,26 @@ public class Topic_08_Buton_Radio_Checkbox_Alert_1 {
 		
 		
 	}
+	@Test
+	public void TC_03_Checkbox_ClickbyJS() throws InterruptedException{
+		driver.get("http://demos.telerik.com/kendo-ui/styling/checkboxes");
+		String checkBoxInput= "//input[@id='eq5']";
+		//Click chọn checkbox Dual-zone air conditioning
+		clickByJS(checkBoxInput);
+		//Kiểm tra check box được chọn
+		Assert.assertTrue(isElementSelected(checkBoxInput));
+		Thread.sleep(3000);
+		//Click không chọn check box Dual-zone air conditioning
+		clickByJS(checkBoxInput);
+		//Kiểm tra check box không được chọn
+		Assert.assertFalse(isElementSelected(checkBoxInput));
+		Thread.sleep(3000);
+	}
 	
-	public void TC_03_ClickByJS() {
-		
+	
+	public void clickByJS(String locator) {
+		WebElement element = driver.findElement(By.xpath(locator));
+		javascript.executeScript("arguments[0].click()", element);
 	}
     public void elementEnabled(String locator) {
     	WebElement element = driver.findElement(By.xpath(locator));
@@ -78,7 +95,29 @@ public class Topic_08_Buton_Radio_Checkbox_Alert_1 {
     		System.out.println("Element is deselected");
     	}
     }
+    
+    public boolean isElementSelected(String locator) {
+    	WebElement element = driver.findElement(By.xpath(locator));
+    	if(element.isSelected()) {
+    		return true;
+    	} else {
+    		return false;
+    	}
+    }
 		
+    public void checkToCheckbox(String locator) {
+    	WebElement element = driver.findElement(By.xpath(locator));
+    	if(!element.isSelected()) {
+    		element.click();
+    	}
+    }
+    
+    public void uncheckToCheckbox(String locator) {
+    	WebElement element = driver.findElement(By.xpath(locator));
+    	if(element.isSelected()) {
+    		element.click();
+    	}
+    }
     // Post - Condition
 	@AfterClass
 	public void afterClass() {
