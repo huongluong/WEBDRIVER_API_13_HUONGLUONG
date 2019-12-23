@@ -2,6 +2,7 @@ package webdriver_api;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,7 @@ public class Topic_08_Buton_Radio_Checkbox_Alert_1 {
     Select select;
     JavascriptExecutor javascript;
     Action action;
+    Alert alert;
 	//Pre - condition 
 	@BeforeClass
 	public void beforeClass() {
@@ -29,7 +31,7 @@ public class Topic_08_Buton_Radio_Checkbox_Alert_1 {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		javascript = (JavascriptExecutor) driver;
-
+    
 		
 	}
 
@@ -57,7 +59,7 @@ public class Topic_08_Buton_Radio_Checkbox_Alert_1 {
 		
 		
 	}
-	@Test
+	//@Test
 	public void TC_03_Checkbox_ClickbyJS() throws InterruptedException{
 		driver.get("http://demos.telerik.com/kendo-ui/styling/checkboxes");
 		String checkBoxInput= "//input[@id='eq5']";
@@ -72,8 +74,85 @@ public class Topic_08_Buton_Radio_Checkbox_Alert_1 {
 		Assert.assertFalse(isElementSelected(checkBoxInput));
 		Thread.sleep(3000);
 	}
+	//@Test
+	public void TC_04_CheckAndUncheckToCheckbox() {
+		driver.get("https://demo.nopcommerce.com/register?returnUrl=%2F");
+		String newLetterCheckbox = "//input[@id='Newsletter']";
+		checkToCheckbox(newLetterCheckbox);
+		checkToCheckbox(newLetterCheckbox);
+		checkToCheckbox(newLetterCheckbox);
+		checkToCheckbox(newLetterCheckbox);
+		Assert.assertTrue(isElementSelected(newLetterCheckbox));
+		
+		uncheckToCheckbox(newLetterCheckbox);
+		uncheckToCheckbox(newLetterCheckbox);
+		uncheckToCheckbox(newLetterCheckbox);
+		uncheckToCheckbox(newLetterCheckbox);
+		Assert.assertFalse(isElementSelected(newLetterCheckbox));
+	}
 	
+	//@Test
+	public void TC_05_HandleAlert() throws InterruptedException {
+		String fullName = "Automation Testing";
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+		driver.findElement(By.xpath("//button[text()='Click for JS Alert']")).click();
+		Thread.sleep(2000);
+		alert = driver.switchTo().alert();
+		
+		Assert.assertEquals(alert.getText(),"I am a JS Alert");	
+		//get message Text in alert
+		alert.accept();
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You clicked an alert successfully ']")).isDisplayed());
+		
+		//cancel alert
+		driver.navigate().refresh();
+		driver.findElement(By.xpath("//button[text()='Click for JS Confirm']")).click();
+		Thread.sleep(2000);
+		alert = driver.switchTo().alert();
+		Assert.assertEquals(alert.getText(),"I am a JS Confirm");
+		alert.dismiss();
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You clicked: Cancel']")).isDisplayed());
+		
+		//input to aler
+		driver.navigate().refresh();
+		driver.findElement(By.xpath("//button[text()='Click for JS Prompt']")).click();
+		Thread.sleep(2000);
+		alert = driver.switchTo().alert();
+		Assert.assertEquals(alert.getText(),"I am a JS prompt");
+		alert.sendKeys(fullName);
+		alert.accept();
+		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='result' and text()='You entered: " + fullName +"']")).isDisplayed());
+		
+		
+	}
 	
+	public void TC_06_authenticationAlert() {
+		String userNameAndPass = "admin";
+		String url = "http://the-internet.herokuapp.com/basic_auth";
+		url = "http://" + userNameAndPass + ":" + userNameAndPass + "@the-internet.herokuapp.com/basic_auth";
+		driver.get(url);
+	}
+	@Test
+	public void TC_07_authenticationAlert() {
+		String userName = "admin";
+		String passWord = "admin";
+		driver.get("http://the-internet.herokuapp.com/");
+		String url = driver.findElement(By.xpath("//a[text()='Basic Auth']")).getAttribute("href");
+		System.out.println("Url = " + url);
+		driver.get(byPassAuthenticationAlert(url, userName, passWord));
+		driver.findElement(By.xpath("//p[contains(text(),'Congratulations! You must have the proper credentials.')]")).isDisplayed();
+	}
+	
+	public String byPassAuthenticationAlert(String url, String userName, String passWord){
+		System.out.println("Old url =" + url);
+		//http://the-internet.herokuapp.com/basic_auth
+		String[] parselink = url.split("//");
+		// 0: http
+		// 1: the-internet.herokuapp.com/basic_auth
+		url = parselink[0] + "//" + userName + ":" + passWord + "@" + parselink[1];
+		System.out.println("New url = " + url);
+		return url;
+	}
 	public void clickByJS(String locator) {
 		WebElement element = driver.findElement(By.xpath(locator));
 		javascript.executeScript("arguments[0].click()", element);
