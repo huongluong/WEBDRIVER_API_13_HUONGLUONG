@@ -104,23 +104,35 @@ public class Topic_09_User_Interaction {
 		Assert.assertTrue(driver.findElement(By.xpath("//p[@id='demo' and text()='Hello Automation Guys!']")).isDisplayed());
 		
 	}
-	@Test
+	//@Test
 	public void TC_05_Right_Click() {
 		driver.get("http://swisnl.github.io/jQuery-contextMenu/demo.html");
 		
 		action.contextClick(findXpath("//span[text()='right click me']")).perform();
 		
-		action.moveToElement(findXpath("//span[@text='Quit']")).perform();
+		action.moveToElement(findXpath("//span[text()='Quit']")).perform();
 		
 		Assert.assertTrue(findXpath("//li[contains(@class,'context-menu-visible') and contains(@class,'context-menu-hover')]/span[text()='Quit']").isDisplayed());
 		
-		action.click(findXpath("//span[@text='Quit']")).perform();
+		action.click(findXpath("//span[text()='Quit']")).perform();
 		
 		Assert.assertEquals(driver.switchTo().alert().getText(),"clicked: quit");
 		
 		driver.switchTo().alert().accept();
 	}
-	
+	@Test
+		public void TC_05_Drag_And_Drop() {
+			driver.get("http://demos.telerik.com/kendo-ui/dragdrop/angular");
+			String targetCircle = "//div[@id='droptarget']";
+			String sourceCircle = "//div[@id='draggable']";
+			
+			action.dragAndDrop(findXpath(sourceCircle), findXpath(targetCircle)).perform();
+			
+			
+			Assert.assertTrue(findXpath("//div[@id='droptarget' and text()='You did great!']").isDisplayed());
+			
+			
+		}
 	public WebElement findXpath(String locator) {
 		return driver.findElement(By.xpath(locator));
 	}
