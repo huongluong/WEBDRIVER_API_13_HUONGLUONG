@@ -1,5 +1,6 @@
 package webdriver_api;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -26,23 +27,37 @@ public class Topic_10_Popup_iFrame {
 
 	
 	@Test
-	public void TC_01_() {
+	public void TC_01_() throws InterruptedException {
 		driver.get("https://kyna.vn/");
-		boolean fancyPopup = driver.findElement(By.xpath("//div[@class='fancybox-inner']")).isDisplayed();
-		System.out.println("Fancy popup display = " + fancyPopup);
-		Assert.assertTrue(fancyPopup);
+		Thread.sleep(3000);
+		//Case 1- Co popup xuất hiện
+		//Case 2- Ko có popup xuất hiện
+		List <WebElement> fancyPopup = driver.findElements(By.xpath("//div[@class='fancybox-inner']"));
+		System.out.println("Number of popup = " + fancyPopup.size());
 		
-		driver.findElement(By.cssSelector(".fancybox-close")).click();
+		if(fancyPopup.size()>0)
+		{
+		       System.out.println("Step 3 - Check popup is displayed. Close popup");
+		       Assert.assertTrue(fancyPopup.get(0).isDisplayed());
+		       driver.findElement(By.cssSelector(".fancybox-close")).click();
+		}
 		
+		//boolean fancyPopup = driver.findElement(By.xpath("//div[@class='fancybox-inner']")).isDisplayed();
+		//System.out.println("Fancy popup display = " + fancyPopup);
+		//Assert.assertTrue(fancyPopup);
+		//driver.findElement(By.cssSelector(".fancybox-close")).click();
+		
+		
+		//Step 4
 		//Switch vào Iframe trước thì mới tương tác với các element trong Iframe đó
-		
 		//Index
-		driver.switchTo().frame(1);
+		//driver.switchTo().frame(1);
 		
 		// Name or Id
-		driver.switchTo().frame("");
+		//driver.switchTo().frame("");
 		
 		// Web Element
+		System.out.println("Switch vào iframe facebook");
 		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='fanpage']//iframe")));
 		
 		boolean facebookIframe = driver.findElement(By.cssSelector("#facebook")).isDisplayed();
@@ -59,7 +74,9 @@ public class Topic_10_Popup_iFrame {
 		
 		driver.findElement(By.className("button-login")).click();
 		driver.findElement(By.id("user-login")).sendKeys("automationfc.vn@gmail.com");
+		Thread.sleep(2000);
 		driver.findElement(By.id("user-password")).sendKeys("automationfc.vn@gmail.com");
+		Thread.sleep(2000);
 		driver.findElement(By.id("btn-submit-login")).click();
 		
 		WebElement userLogin = driver.findElement(By.xpath("//li[@class='account dropdown wrap']//span[@class='user']"));
