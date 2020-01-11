@@ -57,7 +57,7 @@ public class Topic_10_Popup_iFrame {
 		//driver.switchTo().frame("");
 		
 		// Web Element
-		System.out.println("Switch vào iframe facebook");
+		System.out.println("Step 4 - Switch vào iframe facebook");
 		driver.switchTo().frame(driver.findElement(By.xpath("//div[@class='fanpage']//iframe")));
 		
 		boolean facebookIframe = driver.findElement(By.cssSelector("#facebook")).isDisplayed();
