@@ -8,6 +8,8 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.chrome.ChromeDriver;
+//import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -18,6 +20,7 @@ public class Topic_11_Window_Tab {
 	//Khai báo 1 cái biến driver đại diện cho Selenium Webdriver
 	WebDriver driver;
 	Alert alert;
+	String projectPath = System.getProperty("user.dir");
 	//Pre - condition 
 	@BeforeClass
 	public void beforeClass() {
@@ -25,6 +28,11 @@ public class Topic_11_Window_Tab {
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		
+		//use Chrome
+		//System.setProperty("webdriver.chrome.driver", projectPath + "\\libraries\\chromedriver.exe");
+		//ChromeOptions options = new ChromeOptions();
+		//options.addArguments("--lang=vi");
+		//driver = new ChromeDriver(options);
 	}
 
 	
