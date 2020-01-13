@@ -51,7 +51,7 @@ public class Topic_13_UploadFiles {
 		
 	}
 
-	@Test
+	//@Test
 	public void TC_02_() {
 		driver.get("");
 	}
