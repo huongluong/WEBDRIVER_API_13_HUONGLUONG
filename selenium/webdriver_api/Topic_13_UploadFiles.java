@@ -78,6 +78,7 @@ public class Topic_13_UploadFiles {
 		} else {
 			Runtime.getRuntime().exec(new String[] { chromeAutoIT, appiumPath});
 		}
+		Thread.sleep(2000);
 		find("//table//button[@class='btn btn-primary start']").click();
 		Thread.sleep(2000);
 		
