@@ -11,7 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_14_Wait_PartI_FindElement_Status {
+public class Topic_14_Wait_PartI_Element_Status {
 	//Khai báo 1 cái biến driver đại diện cho Selenium Webdriver
 	WebDriver driver;
 	WebDriverWait waitExplicit;
