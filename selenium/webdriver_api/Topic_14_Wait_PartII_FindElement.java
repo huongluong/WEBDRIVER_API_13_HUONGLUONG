@@ -25,7 +25,11 @@ public class Topic_14_Wait_PartII_FindElement {
 	@Test
 	public void TC_01_FindElement() {
 		driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+		//Case 1 : Không tìm thấy Element nào hết
 		
+		//Case 2 : Tìm thấy duy nhất 1 element
+		
+		//Case 3 : Tìm thấy nhiều hơn 1 element (node) 
 	}
 	
 
