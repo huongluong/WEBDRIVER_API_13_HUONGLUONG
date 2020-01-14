@@ -23,13 +23,16 @@ public class Topic_14_Wait_PartII_FindElement {
 
 	
 	@Test
-	public void TC_01_() {
-		driver.get("");
+	public void TC_01_FindElement() {
+		driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+		
 	}
+	
 
 	@Test
-	public void TC_02_() {
-		driver.get("");
+	public void TC_02_FindElements() {
+		driver.get("http://automationpractice.com/index.php?controller=authentication&back=my-account");
+		
 	}
 
 		
