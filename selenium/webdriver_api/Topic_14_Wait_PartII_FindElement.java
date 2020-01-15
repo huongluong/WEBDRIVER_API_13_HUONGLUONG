@@ -68,7 +68,7 @@ public class Topic_14_Wait_PartII_FindElement {
 	    elements = driver.findElements(By.xpath("//button[@type='submit']"));
 	    System.out.println("Size of list = " + elements.size());
 	    Assert.assertFalse(elements.isEmpty());
-	    Assert.assertEquals(elements.size(), 0);
+	    Assert.assertEquals(elements.size(), 4);
 	    
 	}
 
