@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,6 +16,8 @@ import org.testng.annotations.Test;
 public class Topic_14_Wait_PartIV_Implicit_Explicit {
 	//Khai báo 1 cái biến driver đại diện cho Selenium Webdriver
 	WebDriver driver;
+	WebDriverWait waitExplicit;
+	
     By startButtonBy = By.xpath("//button[text()='Start']");
     By loadingImageBy = By.xpath("//div[@id='loading']/img");
     By helloworldTextBy = By.xpath("//div[@id='finish']/h4[text()='Hello World!']");
@@ -25,6 +28,10 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
 	@BeforeClass
 	public void beforeClass() {
 		driver = new FirefoxDriver();
+		//Rõ ràng
+		waitExplicit = new WebDriverWait(driver,10);
+		
+		//Ngầm định không chờ cho element nào có trạng thái cụ thể -> đi tìm element
 		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		
@@ -66,7 +73,7 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
     	return date.toString();
     }
 	@Test
-	public void TC_02_() {
+	public void TC_02_Implicit_Override() {
 		driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
 		
 		//Check element được hiển thị (visible)
@@ -90,7 +97,9 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
 		System.out.println("End displayed -" + getCurrentTime());
 	}
 
+	public void TC_02_Explicit_Visible() {
 		
+	}
     // Post - Condition
 	@AfterClass
 	public void afterClass() {
