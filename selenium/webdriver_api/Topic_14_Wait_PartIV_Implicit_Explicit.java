@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -38,10 +39,10 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
 	}
 
 	
-	@Test
+	//@Test
 	public void TC_01_Implicit_Wait() {
 		driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
-		
+		System.out.println("TC01");
 		//Check element được hiển thị (visible)
 		WebElement startButton = driver.findElement(startButtonBy);
 		Assert.assertTrue(startButton.isDisplayed());
@@ -72,10 +73,10 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
     	Date date = new Date();
     	return date.toString();
     }
-	@Test
+	//@Test
 	public void TC_02_Implicit_Override() {
 		driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
-		
+		System.out.println("TC02");
 		//Check element được hiển thị (visible)
 		WebElement startButton = driver.findElement(startButtonBy);
 		Assert.assertTrue(startButton.isDisplayed());
@@ -96,10 +97,49 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
 		Assert.assertTrue(helloworldText.isDisplayed());
 		System.out.println("End displayed -" + getCurrentTime());
 	}
-
-	public void TC_02_Explicit_Visible() {
+    //@Test
+	public void TC_03_Explicit_Visible() {
+		driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
+		System.out.println("TC03");
+		//Click Start button
+		waitExplicit.until(ExpectedConditions.elementToBeClickable(startButtonBy));
+		driver.findElement(startButtonBy).click();
+		
+		//Loading icon hiển thị và biến mất sau 5s
+		
+		//Wait cho helloWorld được visible trước khi check displayed
+		System.out.println("Start wait visible -" + getCurrentTime());
+		waitExplicit.until(ExpectedConditions.invisibilityOfElementLocated(helloworldTextBy));
+		System.out.println("End wait visible -" + getCurrentTime() );
+		
+		System.out.println("Start displayed -" + getCurrentTime());
+		Assert.assertTrue(driver.findElement(helloworldTextBy).isDisplayed());
+		System.out.println("End displayed - " + getCurrentTime());
 		
 	}
+    @Test
+   	public void TC_04_Explicit_InVisible() {
+   		driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
+   		System.out.println("TC04");
+   		//Click Start button
+   		waitExplicit.until(ExpectedConditions.elementToBeClickable(startButtonBy));
+   		driver.findElement(startButtonBy).click();
+   		
+   		//Loading icon hiển thị và biến mất sau 5s
+   		System.out.println("Start wait invisible -" + getCurrentTime());
+   		waitExplicit.until(ExpectedConditions.invisibilityOfElementLocated(loadingImageBy));
+   		System.out.println("End wait invisible -" + getCurrentTime());
+   		
+   		//Wait cho helloWorld được visible trước khi check displayed
+   		System.out.println("Start wait visible -" + getCurrentTime());
+   		waitExplicit.until(ExpectedConditions.visibilityOfElementLocated(helloworldTextBy));
+   		System.out.println("End wait visible -" + getCurrentTime() );
+   		
+   		System.out.println("Start displayed -" + getCurrentTime());
+   		Assert.assertTrue(driver.findElement(helloworldTextBy).isDisplayed());
+   		System.out.println("End displayed - " + getCurrentTime());
+   		
+   	}
     // Post - Condition
 	@AfterClass
 	public void afterClass() {
