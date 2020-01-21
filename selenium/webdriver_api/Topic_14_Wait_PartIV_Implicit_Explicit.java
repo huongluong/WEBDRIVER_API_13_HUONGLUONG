@@ -33,7 +33,7 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
 		waitExplicit = new WebDriverWait(driver,10);
 		
 		//Ngầm định không chờ cho element nào có trạng thái cụ thể -> đi tìm element
-		driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		
 	}
@@ -117,7 +117,7 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
 		System.out.println("End displayed - " + getCurrentTime());
 		
 	}
-    @Test
+    //@Test
    	public void TC_04_Explicit_InVisible() {
    		driver.get("http://the-internet.herokuapp.com/dynamic_loading/2");
    		System.out.println("TC04");
@@ -140,6 +140,55 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
    		System.out.println("End displayed - " + getCurrentTime());
    		
    	}
+    //@Test
+	public void TC_05_Date_Implicit() {
+   		driver.get("https://demos.telerik.com/aspnet-ajax/ajaxloadingpanel/functionality/explicit-show-hide/defaultcs.aspx");
+   		
+   		//In ra ngày được chọn: No Selected Dates to display.
+   		WebElement dateSelectedText = driver.findElement((By.xpath("//span[@id='ctl00_ContentPlaceholder1_Label1']")));
+   		
+   		System.out.println("Date selected =" + dateSelectedText.getText());
+   		Assert.assertEquals(dateSelectedText.getText(), "No Selected Dates to display.");
+   		
+   		
+   		driver.findElement(By.xpath("//a[text()='7']")).click();
+   		
+   		//Check current dat = selected
+   		Assert.assertTrue(driver.findElement(By.xpath("//td[@class='rcSelected']//a[text()='7']")).isDisplayed());
+   		
+   		System.out.println("Date selected = " + dateSelectedText.getText());
+   		Assert.assertEquals(dateSelectedText.getText(),"Tuesday, January 07, 2020");
+   		
+   		
+   		
+   	}
+    
+    @Test
+   	public void TC_06_Date_Explicit() {
+      		driver.get("https://demos.telerik.com/aspnet-ajax/ajaxloadingpanel/functionality/explicit-show-hide/defaultcs.aspx");
+      		
+      		//In ra ngày được chọn: No Selected Dates to display.
+      		WebElement dateSelectedText = driver.findElement((By.xpath("//span[@id='ctl00_ContentPlaceholder1_Label1']")));
+      	 	System.out.println("Date selected =" + dateSelectedText.getText());
+      		Assert.assertEquals(dateSelectedText.getText(), "No Selected Dates to display.");
+      		
+      		//Click vào current day
+      		driver.findElement(By.xpath("//a[text()='7']")).click();
+      		
+      		//Chờ cho loading icon biến mất
+      		waitExplicit.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@style,'position: absolute;')]//div[@class='raDiv']")));
+      
+      		//Check current dat = selected
+      		Assert.assertTrue(driver.findElement(By.xpath("//td[@class='rcSelected']//a[text()='7']")).isDisplayed());
+      		
+      		//find lại lần nữa.
+      		dateSelectedText = driver.findElement((By.xpath("//span[@id='ctl00_ContentPlaceholder1_Label1']")));
+      		System.out.println("Date selected = " + dateSelectedText.getText());
+      		Assert.assertEquals(dateSelectedText.getText(),"Tuesday, January 07, 2020");
+      		
+      		
+      		
+      	}
     // Post - Condition
 	@AfterClass
 	public void afterClass() {
