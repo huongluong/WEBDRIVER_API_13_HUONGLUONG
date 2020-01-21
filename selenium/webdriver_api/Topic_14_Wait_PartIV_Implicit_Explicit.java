@@ -173,18 +173,18 @@ public class Topic_14_Wait_PartIV_Implicit_Explicit {
       		Assert.assertEquals(dateSelectedText.getText(), "No Selected Dates to display.");
       		
       		//Click vào current day
-      		driver.findElement(By.xpath("//a[text()='7']")).click();
+      		driver.findElement(By.xpath("//a[text()='8']")).click();
       		
       		//Chờ cho loading icon biến mất
       		waitExplicit.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@style,'position: absolute;')]//div[@class='raDiv']")));
       
       		//Check current dat = selected
-      		Assert.assertTrue(driver.findElement(By.xpath("//td[@class='rcSelected']//a[text()='7']")).isDisplayed());
+      		Assert.assertTrue(driver.findElement(By.xpath("//td[@class='rcSelected']//a[text()='8']")).isDisplayed());
       		
       		//find lại lần nữa.
       		dateSelectedText = driver.findElement((By.xpath("//span[@id='ctl00_ContentPlaceholder1_Label1']")));
       		System.out.println("Date selected = " + dateSelectedText.getText());
-      		Assert.assertEquals(dateSelectedText.getText(),"Tuesday, January 07, 2020");
+      		Assert.assertEquals(dateSelectedText.getText(),"Wednesday, January 08, 2020");
       		
       		
       		
