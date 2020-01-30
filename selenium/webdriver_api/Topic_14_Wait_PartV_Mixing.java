@@ -25,10 +25,10 @@ public class Topic_14_Wait_PartV_Mixing {
 		driver = new FirefoxDriver();
 		
 		//Explicit Wait (Element status)
-		//explicitWait = new WebDriverWait(driver, 10);
+		explicitWait = new WebDriverWait(driver, 10);
 		
 		//Implicit wait (Find element/s)
-		//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		
 		
 	}
