@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Selenium WebDriver API" parallel="false">
+  <test name="TestNG Framework">
+  <pakages>
+  	<pakage name = "webdriver_api.Topic_00_Template"/>
+  </pakages>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

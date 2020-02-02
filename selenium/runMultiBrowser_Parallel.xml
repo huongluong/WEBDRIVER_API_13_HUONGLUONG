@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Selenium WebDriver API" parallel="tests" thread-count="2">
+  <test name="Run Testcase on CHROME">
+  <parameter name="browser" value="chrome"></parameter>
+  <classes>
+  	<class name = "testng_framework.Part_IV_Multi_Browser"/>
+  </classes>
+  </test> <!-- Test -->
+   <test name="Run Testcase on FIREFOX">
+  <parameter name="browser" value="firefox"></parameter>
+  <classes>
+  	<class name = "testng_framework.Part_IV_Multi_Browser"/>
+  </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->

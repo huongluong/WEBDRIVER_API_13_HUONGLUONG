@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Run package" parallel="false">
+  <test name="Run Testcase on Firefox">
+  <parameter name="browser" value="firefox"></parameter>
+  <packages>
+  	<package name = "testng_framework"/>
+  </packages>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
