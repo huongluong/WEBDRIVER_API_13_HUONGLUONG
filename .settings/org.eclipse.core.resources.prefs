@@ -1,5 +1,15 @@
 eclipse.preferences.version=1
 encoding//selenium/webdriver_api/Topic_00_Template.java=UTF-8
 encoding//selenium/webdriver_api/Topic_01_CheckEnvironment.java=UTF-8
-encoding//selenium/webdriver_api/Topic_02_Selenium_Command.java=UTF-8
+encoding//selenium/webdriver_api/Topic_02_Locator_In_Selenium.java=UTF-8
+encoding//selenium/webdriver_api/Topic_03_XPath_Part1_Ex.java=UTF-8
+encoding//selenium/webdriver_api/Topic_03_XPath_Part_I.java=UTF-8
+encoding//selenium/webdriver_api/Topic_04_Browser_1.java=UTF-8
+encoding//selenium/webdriver_api/Topic_04_Browser_2.java=UTF-8
+encoding//selenium/webdriver_api/Topic_05_Element_I.java=UTF-8
+encoding//selenium/webdriver_api/Topic_06_Textbox_TextArea.java=UTF-8
+encoding//selenium/webdriver_api/Topic_07_CustomDropdownList.java=UTF-8
+encoding//selenium/webdriver_api/Topic_07_DropDownList.java=UTF-8
+encoding//selenium/webdriver_api/Topic_11_Window_Tab.java=UTF-8
+encoding//selenium/webdriver_api/Topic_12_JavascriptExecutor.java=UTF-8
 encoding/<project>=UTF-8
