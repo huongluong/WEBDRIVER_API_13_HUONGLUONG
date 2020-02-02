@@ -16,6 +16,7 @@ public class Part_I_Annotations {
 	  public void TC_01() {
 		  System.out.println("Run test 01");
 	  }
+	  @Test
 	  public void TC_02() {
 		  System.out.println("Run test 02");
 	  }
